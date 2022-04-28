@@ -1,0 +1,24 @@
+{
+    "pipeline": {
+        "name": "log-check-reduce"
+    },
+    "input": {
+        "pfs": {
+            "repo": "log-check",
+            "branch": "master",
+            "glob": "/"
+        }
+    },
+    "transform": {
+        "cmd": [
+            "bash"
+        ],
+        "stdin": [
+            "set -x",
+            "for f in /pfs/log-check/*",
+            "do",
+            "cat $f >> /pfs/out/log-analysis.txt",
+            "done"
+        ]
+    }
+}

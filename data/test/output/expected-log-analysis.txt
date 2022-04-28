@@ -1,0 +1,2 @@
+/pfs/logs/example.log 5 warnings and 4 errors
+/pfs/logs/example2.log 4 warnings and 3 errors
