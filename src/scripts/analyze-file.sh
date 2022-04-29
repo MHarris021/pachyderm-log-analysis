@@ -4,5 +4,5 @@ for f in /pfs/logs/*.log; do
     echo "Processing $f"
     directory=$(dirname "$f")
     out=$(basename "$directory")
-    echo "$f $(grep -icw "$1" "$f") " >> /pfs/out/"$out"-"$PACH_DATUM_ID"-analysis.txt
+    echo "{'name':'$f', 'phrase': '$1', 'count': '$(grep -icw "$1" "$f")' }" >> /pfs/out/"$out"-"$PACH_DATUM_ID"-analysis.json
 done

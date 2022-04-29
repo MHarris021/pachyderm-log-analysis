@@ -1,4 +1,4 @@
-function(phrase, suffix)
+function(phrase, suffix, imageVersion)
 {
     "pipeline" : {
         "name": "log-analyzer-"+suffix,
@@ -11,7 +11,7 @@ function(phrase, suffix)
         }
     },
     "transform" : {
-        "image": "darcstarsolutions/pachyderm-log-analyzer:1.0.1",
+        "image": "darcstarsolutions/pachyderm-log-analyzer:"+imageVersion,
         "cmd" : [ "bash" ],
         "stdin" : [
             "./analyze-file.sh " + phrase
