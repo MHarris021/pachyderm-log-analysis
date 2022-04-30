@@ -1,20 +1,33 @@
-function(phrase, suffix, imageVersion)
+function(pipeline1, pipeline2, imageVersion)
 {
     "pipeline" : {
-        "name": "log-analyzer-"+suffix,
+        "name": "log-analyzer-reducer",
     },
     "input" : {
-        "pfs" : {
-            "repo" : "logs",
-            "branch" : "master",
-            "glob" : "/*.log"
+        "join":[
+        {
+            "pfs" : {
+                "repo" : pipeline1,
+                "branch" : "master",
+                "glob" : "/*-analysis.json",
+                "join_on": "$1"
+                }
+        },
+        {
+            "pfs" : {
+                "repo" : pipeline2,
+                "branch" : "master",
+                "glob" : "/*-analysis.json",
+                "join_on": "$1"
+            },
         }
+        ],
     },
     "transform" : {
         "image": "darcstarsolutions/pachyderm-log-analyzer:"+imageVersion,
         "cmd" : [ "bash" ],
         "stdin" : [
-            "./analyze-file.sh " + phrase
+            "./reduce-analysis-files.sh " + "/pfs/"+pipeline1 + " " + "/pfs/"+pipeline2 + " " + "/pfs/out"
             ]
     }
 }

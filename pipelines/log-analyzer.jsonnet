@@ -14,7 +14,7 @@ function(searchTerm, suffix, imageVersion)
         "image": "darcstarsolutions/pachyderm-log-analyzer:"+imageVersion,
         "cmd" : [ "bash" ],
         "stdin" : [
-            "./analyze-file.sh " + searchTerm
+            "./analyze-file.sh"+ " " + searchTerm + " "+ "/pfs/logs" +" "+ "/pfs/out"
             ]
     }
 }

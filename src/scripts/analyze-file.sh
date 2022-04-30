@@ -2,9 +2,15 @@
 set -x
 
 searchTerm=$1
-for f in /pfs/logs/*.log; do
+directory=$2
+output_directory=$3
+for f in "$directory"/*.log; do
     echo "Processing $f"
     directory=$(dirname "$f")
-    out=$(basename "$directory")
-    echo "{\"name\":$f, \"searchTerm\": $searchTerm, \"count\": $(grep -icw "$1" "$f") }" >> /pfs/out/"$out"-"$PACH_DATUM_ID"-analysis.json
+    subdirectory=$(basename "$directory")
+    filename=$(basename "$f")
+    count=$(grep -icw "$searchTerm" "$f")
+    mkdir -p "$output_directory"/"$subdirectory"
+    output="{\"filename\":\"$filename\", \"filepath\":\"$directory\",\"searchTerm\": \"$searchTerm\", \"count\": \"$count\" }"
+    echo "$output" | jq '.'  >> "$output_directory"/"$subdirectory"/"$filename"-analysis.json
 done

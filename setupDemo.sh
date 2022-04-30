@@ -2,6 +2,7 @@ set -x
 
 
 version=$1
+noCache=
 noCache=$2
 ./scripts/buildAndPushImage.sh "$version" "$noCache"
 ./scripts/createRepo.sh logs
