@@ -1,15 +1,17 @@
 function(pipeline1, pipeline2, imageVersion)
 {
     "pipeline" : {
-        "name": "log-analyzer-reducer",
+        "name": "log-analyzer-reducer"
+
     },
+    "description":"This is a pipeline to reduce the log analyzer pipelines: "+pipeline1 + " and " + pipeline2,
     "input" : {
         "join":[
         {
             "pfs" : {
                 "repo" : pipeline1,
                 "branch" : "master",
-                "glob" : "/*-analysis.json",
+                "glob" : "/logs/(*)-analysis.json",
                 "join_on": "$1"
                 }
         },
@@ -17,7 +19,7 @@ function(pipeline1, pipeline2, imageVersion)
             "pfs" : {
                 "repo" : pipeline2,
                 "branch" : "master",
-                "glob" : "/*-analysis.json",
+                "glob" : "/logs/(*)-analysis.json",
                 "join_on": "$1"
             },
         }
@@ -27,7 +29,7 @@ function(pipeline1, pipeline2, imageVersion)
         "image": "darcstarsolutions/pachyderm-log-analyzer:"+imageVersion,
         "cmd" : [ "bash" ],
         "stdin" : [
-            "./reduce-analysis-files.sh " + "/pfs/"+pipeline1 + " " + "/pfs/"+pipeline2 + " " + "/pfs/out"
+            "./reduce-analysis-files.sh" + " " + "/pfs/"+pipeline1+"/logs" + " " + "/pfs/"+pipeline2+"/logs" + " " + "/pfs/out"
             ]
     }
 }

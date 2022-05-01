@@ -4,11 +4,10 @@ set -x
 directory1=$1
 directory2=$2
 output_directory=$3
+mkdir -p "$output_directory/logs"
+
 for f in "$directory1"/*.json; do
     echo "Processing $f"
-    directory=$(dirname "$f")
-    subdirectory=$(basename "$directory")
-    mkdir -p "$output_directory/$subdirectory"
     filename=$(jq -r '.filename' "$f")
     filepath=$(jq -r '.filepath' "$f")
     searchTerm1=$(jq -r '.searchTerm' "$f")
@@ -17,5 +16,5 @@ for f in "$directory1"/*.json; do
     searchTerm2=$(jq -r '.searchTerm' "$f2")
     count2=$(jq -r '.count' "$f2")
     output="{\"filename\":\"$filename\", \"filepath\":\"$filepath\",\"searchTerms\": [{\"searchTerm\":\"$searchTerm1\", \"count\": \"$count1\"}, {\"searchTerm\":\"$searchTerm2\", \"count\": \"$count2\"}] }"
-    echo "$output" | jq '.' >> "$output_directory"/"$filename"-"$PACH_DATUM_ID"-analysis.json
+    echo "$output" | jq '.' >> "$output_directory"/logs/"$filename"-reduced-analysis.json
 done

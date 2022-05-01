@@ -4,13 +4,13 @@ set -x
 searchTerm=$1
 directory=$2
 output_directory=$3
+subdirectory=$(basename "$directory")
+mkdir -p "$output_directory"/"$subdirectory"
+
 for f in "$directory"/*.log; do
     echo "Processing $f"
-    directory=$(dirname "$f")
-    subdirectory=$(basename "$directory")
     filename=$(basename "$f")
     count=$(grep -icw "$searchTerm" "$f")
-    mkdir -p "$output_directory"/"$subdirectory"
     output="{\"filename\":\"$filename\", \"filepath\":\"$directory\",\"searchTerm\": \"$searchTerm\", \"count\": \"$count\" }"
     echo "$output" | jq '.'  >> "$output_directory"/"$subdirectory"/"$filename"-analysis.json
 done

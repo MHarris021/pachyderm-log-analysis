@@ -3,6 +3,7 @@ function(searchTerm, suffix, imageVersion)
     "pipeline" : {
         "name": "log-analyzer-"+suffix,
     },
+    "description": "Log analyzer for "+searchTerm,
     "input" : {
         "pfs" : {
             "repo" : "logs",
