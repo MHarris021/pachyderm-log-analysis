@@ -5,3 +5,4 @@ pachctl update pipeline --reprocess --jsonnet ./pipelines/log-analyzer.jsonnet -
 pachctl update pipeline --reprocess --jsonnet ./pipelines/log-analyzer.jsonnet --arg suffix="error" --arg searchTerm="error" --arg imageVersion="$version"
 pachctl update pipeline --reprocess --jsonnet ./pipelines/log-analyzer-reducer.jsonnet --arg pipeline1="log-analyzer-warning" --arg pipeline2="log-analyzer-error" --arg imageVersion="$version"
 pachctl update pipeline --reprocess --jsonnet ./pipelines/combine-log-analysis.jsonnet --arg inputPipeline="log-analyzer-reducer" --arg imageVersion="$version"
+pachctl update pipeline --reprocess --jsonnet ./pipelines/create-log-analysis-report.jsonnet --arg inputPipeline="combine-log-analysis" --arg imageVersion="$version"
