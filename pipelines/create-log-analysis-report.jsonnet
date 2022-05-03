@@ -1,4 +1,4 @@
-function(inputPipeline, imageVersion)
+function(inputPipeline, imageTag)
 {
     "pipeline" : {
         "name": "create-log-analysis-report",
@@ -12,7 +12,7 @@ function(inputPipeline, imageVersion)
         }
     },
     "transform" : {
-        "image": "darcstarsolutions/pachyderm-log-analyzer:"+imageVersion,
+        "image": imageTag,
         "cmd" : [ "bash" ],
         "stdin" : [
             "./create-log-analysis-report.sh"+ " " + "/pfs/"+inputPipeline +" "+ "/pfs/out"

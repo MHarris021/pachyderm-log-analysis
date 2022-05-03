@@ -1,6 +1,6 @@
 set -x
 
-# This script is used to setup the demo.
+# This script is used to update the demo.
 imageVersion=$1
 noCache=$2
 imageRepo=$3
@@ -22,9 +22,5 @@ if [ -z "$imageName" ] ; then
   imageName="pachyderm-log-analyzer"
 fi
 
-imageTag="${imageRepo}/${imageName}:${imageVersion}"
-
-./scripts/buildAndPushImage.sh "$imageRepo" "$imageName" "$imageVersion" "$noCache"
-./scripts/createRepo.sh logs
-./scripts/loadTestData.sh
-./scripts/createPipelines.sh "$imageTag"
+./teardownDemo.sh
+./setupDemo.sh "$imageVersion" "$noCache" "$imageRepo" "$imageName"

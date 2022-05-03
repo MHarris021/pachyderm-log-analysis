@@ -1,4 +1,4 @@
-function(pipeline1, pipeline2, imageVersion)
+function(pipeline1, pipeline2, imageTag)
 {
     "pipeline" : {
         "name": "log-analyzer-reducer"
@@ -26,7 +26,7 @@ function(pipeline1, pipeline2, imageVersion)
         ],
     },
     "transform" : {
-        "image": "darcstarsolutions/pachyderm-log-analyzer:"+imageVersion,
+        "image": imageTag,
         "cmd" : [ "bash" ],
         "stdin" : [
             "./reduce-analysis-files.sh" + " " + "/pfs/"+pipeline1+"/logs" + " " + "/pfs/"+pipeline2+"/logs" + " " + "/pfs/out"

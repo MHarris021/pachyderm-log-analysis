@@ -1,4 +1,4 @@
-function(inputPipeline, imageVersion)
+function(inputPipeline, imageTag)
 {
     "pipeline" : {
         "name": "combine-log-analysis",
@@ -12,7 +12,7 @@ function(inputPipeline, imageVersion)
         }
     },
     "transform" : {
-        "image": "darcstarsolutions/pachyderm-log-analyzer:"+imageVersion,
+        "image": imageTag,
         "cmd" : [ "bash" ],
         "stdin" : [
             "./combine-log-analysis.sh"+ " " + "/pfs/"+inputPipeline+"/logs" +" "+ "/pfs/out"

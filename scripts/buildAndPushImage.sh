@@ -1,8 +1,12 @@
 set -x
 
-version=$1
-noCache=$2
+imageRepo="$1"
+imageName="$2"
+imageVersion="$3"
+noCache=$4
+
+imageTag="${imageRepo}/${imageName}:${imageVersion}"
 # shellcheck disable=SC2086
-docker build $noCache -t pachyderm-log-analyzer .
-docker tag pachyderm-log-analyzer darcstarsolutions/pachyderm-log-analyzer:"$version"
-docker push darcstarsolutions/pachyderm-log-analyzer:"$version"
+docker build $noCache -t "$imageName" .
+docker tag "$imageName" "$imageTag"
+docker push "$imageTag"
