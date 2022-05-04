@@ -1,2 +1,6 @@
-/pfs/logs/example.log 5 warnings and 4 errors
-/pfs/logs/example2.log 4 warnings and 3 errors
+Log Analysis Report:
+
+Log file example1.log found in /pfs/logs has 5 warning(s), 4 error(s)
+Log file example2.log found in /pfs/logs has 4 warning(s), 3 error(s)
+Log file example3.log found in /pfs/logs has 0 warning(s), 4 error(s)
+Log file example4.log found in /pfs/logs has 4 warning(s), 0 error(s)

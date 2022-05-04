@@ -3,7 +3,7 @@ function(inputPipeline, imageTag)
     "pipeline" : {
         "name": "create-log-analysis-report",
     },
-    "description": "Combine log analysis json files into a single json formatted file",
+    "description": "Create human readable combined log analysis report file from a single json formatted file",
     "input" : {
         "pfs" : {
             "repo" : inputPipeline,

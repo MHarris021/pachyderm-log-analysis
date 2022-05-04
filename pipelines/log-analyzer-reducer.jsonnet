@@ -4,7 +4,7 @@ function(pipeline1, pipeline2, imageTag)
         "name": "log-analyzer-reducer"
 
     },
-    "description":"This is a pipeline to reduce the log analyzer pipelines: "+pipeline1 + " and " + pipeline2,
+    "description":"This pipeline reduces the log analysis json data into a single file from pipelines: "+pipeline1 + " and " + pipeline2,
     "input" : {
         "join":[
         {

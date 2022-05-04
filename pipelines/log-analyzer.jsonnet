@@ -3,7 +3,7 @@ function(searchTerm, suffix, imageTag)
     "pipeline" : {
         "name": "log-analyzer-"+suffix,
     },
-    "description": "Log analyzer for "+searchTerm,
+    "description": "This is the pipeline to search a log file for "+searchTerm +" and return the number of times it appears",
     "input" : {
         "pfs" : {
             "repo" : "logs",
